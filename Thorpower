@@ -1,0 +1,46 @@
+# Auto-generated code below aims at helping you parse
+# the standard input according to the problem statement.
+# ---
+# Hint: You can use the debug stream to print initialTX and initialTY, if Thor seems not follow your orders.
+
+# lightX: the X position of the light of power
+# lightY: the Y position of the light of power
+# initialTX: Thor's starting X position
+# initialTY: Thor's starting Y position
+# ThorX: Thor's X position
+# ThorY: Thor's Y position
+read lightX lightY initialTX initialTY
+
+thorX=$initialTX
+thorY=$initialTY
+
+# game loop
+while true; do
+    # remainingTurns: The remaining amount of turns Thor can move. Do not remove this line.
+    read remainingTurns
+    dirX=""
+    dirY=""
+    # Write an action using echo
+    # To debug: echo "Debug messages..." >&2
+	if [ $lightY -gt $thorY ]; then
+		dirY="S"
+		((thorY=$thorY+1))
+	else
+		if [ $lightY -lt $thorY ]; then
+			dirY="N"
+			((thorY=$thorY-1))
+		fi
+	fi
+	if [ $lightX -gt $thorX ]; then
+		dirX="E"
+		((thorX=$thorX+1))
+		else
+			if [ $lightX -lt $thorX ]; then
+				dirX="W"
+				((thorX=$thorX-1))
+			fi
+	fi
+	
+    # A single line providing the move to be made: N NE E SE S SW W or NW
+    echo ${dirY}${dirX}
+done
