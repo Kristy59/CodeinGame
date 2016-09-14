@@ -1,0 +1,53 @@
+# Auto-generated code below aims at helping you parse
+# the standard input according to the problem statement.
+
+# N: Number of elements which make up the association table.
+read N
+# Q: Number Q of file names to be analyzed.
+read Q
+declare -A array
+
+#echo "Debug messages..." >&2
+
+for (( i=0; i<N; i++ )); do
+    # EXT: file extension
+    # MT: MIME type.
+    read EXT MT
+    ext=${EXT,,}
+#    echo $ext
+#    echo $EXT $MT >&2
+    array[$ext]=$MT;
+    #echo " La valeur du tableau pour le champ test est : ${array[test]}" >&2
+done
+
+for (( i=0; i<Q; i++ )); do
+    # FNAME: One file name per line.
+    read FNAME
+#    echo $FNAME
+    name=${FNAME,,}
+    name=${name##*.}
+#    echo $name
+    #read filename extname <<< ${FNAME//./ }
+    #echo "Extension is $extname" >&2
+    #echo $FNAME >&2
+   if [[ $FNAME == *"."* ]] && [[ $FNAME != *"." ]]; then
+#        find_extension=$(echo $name | cut -d "." -f2)
+#      echo $find_extension >&2
+      #echo ${montableau[2]}
+        if [ -z ${array[$name]} ]; then
+            echo "UNKNOWN"
+        else
+            echo ${array[$name]}
+        fi
+    else
+        echo "UNKNOWN"
+    fi
+
+done
+
+# Write an action using echo
+# To debug: echo "Debug messages..." >&2
+
+
+# For each of the Q filenames, display on a line the corresponding MIME type. If there is no corresponding type, then display UNKNOWN.
+#echo "UNKNOWN"
